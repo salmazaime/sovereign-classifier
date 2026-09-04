@@ -192,6 +192,5 @@ The decision engine, status resolution logic, and interceptor routing are all pu
 ---
 
 ## Author
-
-Built as a PFE (Projet de Fin d'Études) internship project — Atlas Cloud.
+Zaime Salma
 ```
