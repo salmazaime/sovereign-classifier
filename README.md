@@ -29,25 +29,13 @@ Most compliance tooling treats "can this data leave the country" as a single yes
 
 ## Architecture
 
-```
-┌─────────────────────────────┐        ┌──────────────────────────────────┐
-│   Client-side (portable)    │        │        Atlas Cloud Platform        │
-│                              │  HTTPS │                                    │
-│  ┌────────────────────────┐ │  only  │  ┌──────────────┐  ┌────────────┐ │
-│  │ Discovery Connectors    │─┼───────▶│  │  FastAPI     │  │ PostgreSQL │ │
-│  │ (AWS / Azure scanners)  │ │        │  │  REST API    │◀─┤ (system    │ │
-│  └────────────────────────┘ │        │  │              │  │  of record)│ │
-│                              │        │  └──────┬───────┘  └────────────┘ │
-│  ┌────────────────────────┐ │        │         │                          │
-│  │ CI/CD Interceptor       │─┼───────▶│  ┌──────▼───────┐  ┌────────────┐ │
-│  │ (Terraform/K8s parser,  │ │        │  │ Rule-Based   │  │   Neo4j    │ │
-│  │  GitHub Actions gate)   │ │        │  │ Decision     │  │ (knowledge │ │
-│  └────────────────────────┘ │        │  │ Engine       │  │  graph)    │ │
-│                              │        │  └──────────────┘  └────────────┘ │
-└──────────────────────────────┘        │                                    │
-                                         │  Dashboard (Jinja2 + vanilla JS)   │
-                                         └────────────────────────────────────┘
-```
+See [`docs/architecture.png`](docs/architecture.png) for the full system diagram.
+
+**In short:**
+- **Client-side components** (discovery connectors, CI/CD interceptor) run entirely outside Atlas Cloud, on the client's own infrastructure, communicating exclusively over authenticated HTTP. They never import a database driver directly — a client can run these on any machine with network access to the platform API.
+- **PostgreSQL** is the single source of truth: companies, entities, canonical schema history, policy decisions, authorization requests, audit evidence — all append-only where legally required.
+- **Neo4j** models infrastructure dependency relationships (which workload depends on which data asset), enabling impact-radius queries the relational model can't express efficiently.
+- **FastAPI** sits at the center as the only entry point client-side components talk to — the decision engine, both databases, and the dashboard are all reached exclusively through it.
 
 - **Client-side components** (discovery connectors, CI/CD interceptor) run entirely outside Atlas Cloud, on the client's own infrastructure, communicating exclusively over authenticated HTTP. They never import a database driver directly — a client can run these on any machine with network access to the platform API.
 - **PostgreSQL** is the single source of truth: companies, entities, canonical schema history, policy decisions, authorization requests, audit evidence — all append-only where legally required.
