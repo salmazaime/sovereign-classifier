@@ -1,0 +1,26 @@
+{# app/templates/settings.html #}
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+  <h2>Account</h2>
+  <div id="settings-account"></div>
+</div>
+
+<div class="card">
+  <h2>Company Sovereignty Profile</h2>
+  <p class="muted" style="margin-top:-10px; margin-bottom: 18px;">
+    These settings determine how the decision engine evaluates transfers for your organization.
+  </p>
+  <div id="settings-company"></div>
+</div>
+
+<div class="card">
+  <h2>About</h2>
+  <p class="muted">Sovereignty Compliance Platform -- built on Atlas Cloud infrastructure, enforcing Moroccan data sovereignty (Loi 09-08, Loi 05-20) across multi-cloud deployments.</p>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<script src="/static/js/settings.js"></script>
+{% endblock %}

@@ -1,0 +1,34 @@
+# .github/workflows/sovereignty_gate.yml
+name: Sovereignty Compliance Gate (IaC)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  sovereignty-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run sovereignty IaC gate
+        env:
+          SOVEREIGNTY_API_URL: ${{ secrets.SOVEREIGNTY_API_URL }}
+          SOVEREIGNTY_COMPANY_NAME: ${{ vars.SOVEREIGNTY_COMPANY_NAME }}
+          SOVEREIGNTY_COMPANY_SECTOR: ${{ vars.SOVEREIGNTY_COMPANY_SECTOR }}
+        run: python -m scripts.run_pipeline_interceptor
+
+      # This step only runs if the gate above exited 0 -- GitHub
+      # Actions stops the job on a failed step by default.
+      - name: Deploy
+        run: echo "Deploying now that infrastructure has been confirmed sovereignty-compliant..."
+        

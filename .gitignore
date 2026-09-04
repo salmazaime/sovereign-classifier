@@ -1,0 +1,70 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+
+# Python environments
+.venv/
+venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.noserc
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Local Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# Database / Local Storage (Docker volumes or local DB dumps)
+*.sqlite3
+*.db
+postgres_data/
+pgdata/
+
+# Logs
+*.log
+logs/
+
+# IDEs & Code Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Miscellaneous
+.python-version
+
+*.pdf
+node_modules/

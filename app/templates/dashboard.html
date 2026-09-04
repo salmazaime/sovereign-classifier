@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="auth-view">
+  <div class="auth-logo">
+    <img src="/static/img/atlas-cloud-logo.svg" alt="Atlas Cloud">
+    <div class="tagline">Sovereignty Compliance Platform</div>
+  </div>
+  <div class="auth-tabs">
+    <button class="btn active" id="tab-login" onclick="showAuthTab('login')">Sign in</button>
+    <button class="btn" id="tab-register" onclick="showAuthTab('register')">Register company</button>
+  </div>
+  <div id="login-form">
+    <label>Email</label><input id="login-email" type="email" autocomplete="username">
+    <label>Password</label><input id="login-password" type="password" autocomplete="current-password">
+    <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="login()">Sign in</button>
+  </div>
+  <div id="register-form" style="display:none;">
+    <label>Company name</label><input id="reg-company-name">
+    <label>Sector</label><input id="reg-company-sector" placeholder="e.g. banking">
+    <label>Your name</label><input id="reg-admin-name">
+    <label>Your email</label><input id="reg-admin-email" type="email">
+    <label>Password</label><input id="reg-admin-password" type="password">
+    <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="register()">Create company account</button>
+  </div>
+  <div id="auth-error" class="error"></div>
+</div>
+
+<div id="overview-view" class="view">
+  <div class="grid-4" id="overview-stats"></div>
+  <div class="dash-grid">
+    <div class="card">
+      <h2>Decisions Over Time</h2>
+      <div class="chart-box"><canvas id="decisions-chart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Outcome Breakdown</h2>
+      <div class="chart-box"><canvas id="outcome-donut"></canvas></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h2>Deployment Geography</h2>
+    <div id="world-map"></div>
+    <div id="geo-legend" style="margin-top:14px;"></div>
+  </div>
+</div>
+
+<div id="decisions-view" class="view">
+  <div class="card">
+    <div class="card-row"><h2 style="margin:0;">Decisions</h2></div>
+    <div class="filters">
+      <select id="decision-filter" onchange="loadDecisions()">
+        <option value="">All outcomes</option>
+        <option value="ALLOW">Allowed</option>
+        <option value="DENY">Denied</option>
+        <option value="REVIEW">Review pending</option>
+      </select>
+    </div>
+    <div id="decisions-list"></div>
+  </div>
+</div>
+
+<div id="reviews-view" class="view">
+  <div class="card"><h2>Pending Reviews</h2><div id="reviews-list"></div></div>
+</div>
+
+<div id="reports-view" class="view">
+  <div class="card">
+    <h2>Generate Audit Report</h2>
+    <div class="two-col">
+      <div><label>From</label><input id="report-start" placeholder="Select date"></div>
+      <div><label>To</label><input id="report-end" placeholder="Select date"></div>
+    </div>
+    <button class="btn btn-primary" onclick="generateReport()"><i class="fa-solid fa-file-shield"></i> Generate Evidence Pack</button>
+    <div id="report-result" style="margin-top: 14px;"></div>
+  </div>
+</div>
+
+<div id="team-view" class="view">
+  <div class="card">
+    <h2>Team</h2>
+    <div id="team-list"></div>
+    <div id="invite-form-container" style="margin-top: 22px; display:none;">
+      <h2>Invite teammate</h2>
+      <label>Name</label><input id="invite-name">
+      <label>Email</label><input id="invite-email" type="email">
+      <label>Initial password</label><input id="invite-password" type="password">
+      <label>Role</label>
+      <select id="invite-role">
+        <option value="viewer">Viewer</option>
+        <option value="compliance_reviewer">Compliance reviewer</option>
+        <option value="compliance_officer">Compliance officer</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button class="btn btn-primary" onclick="inviteUser()">Invite</button>
+    </div>
+  </div>
+  <div class="card" id="api-keys-card" style="display:none;">
+    <h2>API Keys</h2>
+    <div id="api-keys-list"></div>
+    <label>Key name</label><input id="new-key-name" placeholder="e.g. ci-interceptor">
+    <button class="btn btn-primary" onclick="createApiKey()">Generate new key</button>
+    <div id="new-key-result"></div>
+  </div>
+</div>
+
+{% endblock %}
+
