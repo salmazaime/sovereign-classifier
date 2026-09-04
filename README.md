@@ -77,24 +77,24 @@ See [`docs/architecture.png`](docs/architecture.png) for the full system diagram
 ```
 sovereign-classifier/
 ├── app/
-│   ├── api/                # Core REST routes
-│   ├── auth/                # JWT + API key authentication, RBAC
-│   ├── connectors/          # AWS/Azure discovery, content detection
-│   ├── db/                  # PostgreSQL repository layer
-│   ├── graph/                # Neo4j repository layer
-│   ├── ingestion/            # Discovery-finding ingestion pipeline
-│   ├── interceptor/           # CI/CD gate (IaC parsers, orchestration)
-│   ├── observability/         # Logging, metrics, request context
-│   ├── policy/                # Decision engine, lookup tables, explainability
-│   ├── compliance/            # PDF audit report generation
-│   ├── static/                # CSS, JS, images
-│   ├── templates/             # Jinja2 dashboard pages
-│   └── schemas.py             # Pydantic models (validation boundary)
-├── config/                    # Legal lookup tables (adequacy list, qualified providers)
-├── postgres/init/             # Database schema migrations
-├── scripts/                   # Discovery runner, CI interceptor entry point, seed scripts
-├── tests/                     # Unit + integration tests
-├── .github/workflows/         # Sovereignty compliance CI gate
+│   ├── api/                    # Core REST routes
+│   ├── auth/                   # JWT + API key auth, RBAC
+│   ├── connectors/             # AWS/Azure discovery, scanning
+│   ├── db/                     # PostgreSQL repository layer
+│   ├── graph/                  # Neo4j repository layer
+│   ├── ingestion/              # Discovery ingestion pipeline
+│   ├── interceptor/            # CI/CD gate (IaC parser, orchestration)
+│   ├── observability/          # Logging, metrics, request context
+│   ├── policy/                 # Decision engine, lookup tables
+│   ├── compliance/             # PDF audit report generation
+│   ├── static/                 # CSS, JS, images
+│   ├── templates/              # Jinja2 dashboard pages
+│   └── schemas.py              # Pydantic models (validation boundary)
+├── config/                     # Legal lookup tables
+├── postgres/init/              # Database schema migrations
+├── scripts/                    # Runner, CI entry point, seed scripts
+├── tests/                      # Unit + integration tests
+├── .github/workflows/          # Sovereignty compliance CI gate
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
