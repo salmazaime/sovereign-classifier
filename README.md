@@ -74,6 +74,23 @@ See [`docs/architecture.png`](docs/architecture.png) for the full system diagram
 
 ## Project structure
 
+See [`docs/project_structure.png`](docs/project_structure.png) for the full file tree.
+
+**Key directories:**
+- **`app/api/`** — Core REST routes
+- **`app/auth/`** — JWT + API key authentication, RBAC
+- **`app/connectors/`** — AWS/Azure discovery, content detection
+- **`app/db/`** / **`app/graph/`** — PostgreSQL and Neo4j repository layers
+- **`app/interceptor/`** — CI/CD gate (Terraform/K8s parsers, orchestration)
+- **`app/policy/`** — Decision engine, lookup tables, explainability
+- **`app/compliance/`** — PDF audit report generation
+- **`app/static/`** / **`app/templates/`** — Dashboard frontend
+- **`config/`** — Legal lookup tables (adequacy list, qualified providers)
+- **`postgres/init/`** — Database schema migrations
+- **`scripts/`** — Discovery runner, CI interceptor entry point, seed scripts
+- **`tests/`** — Unit + integration tests
+- **`.github/workflows/`** — Sovereignty compliance CI gate
+
 ```
 sovereign-classifier/
 ├── app/
