@@ -74,7 +74,7 @@ See [`docs/architecture.png`](docs/architecture.png) for the full system diagram
 
 ## Project structure
 
-See [`docs/project_structure.png`](docs/project_structure.png) for the full file tree.
+See [`docs/project_structure.jpeg`](docs/project_structure.jpeg) for the full file tree.
 
 **Key directories:**
 - **`app/api/`** — Core REST routes
